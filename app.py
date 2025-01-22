@@ -243,7 +243,7 @@ if "data" in st.session_state:
         feature=st.number_input(f'{prediktor_x[i]},  input range:  {df[columns[i]].min()} - {df[columns[i]].max()}', value=df[columns[i]].mean())
         output.append(feature)
         df1 = (pd.DataFrame(output, columns=([''])))
-   st.write(f"parameter regresi = {model.params}")
+    st.write(f"parameter regresi = {model.params}")
     [k,l]=df1.shape
     sum_prediktor=0
     for i in range(k):
