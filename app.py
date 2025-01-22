@@ -243,10 +243,7 @@ if "data" in st.session_state:
         feature=st.number_input(f'{prediktor_x[i]},  input range:  {df[columns[i]].min()} - {df[columns[i]].max()}', value=df[columns[i]].mean())
         output.append(feature)
         df1 = (pd.DataFrame(output, columns=([''])))
-    #predik=model.params[0] + model.params[1]*df1.iloc[0] + model.params[2]*df1.iloc[1]+ model.params[3]*df1.iloc[2]+ model.params[4]*df1.iloc[3]+ model.params[5]*df1.iloc[4]
-    #st.write(f"#### Prediksi {columns[5]} : {float(predik):0.04f}")
-
-    st.write(f"parameter regresi = {model.params}")
+   st.write(f"parameter regresi = {model.params}")
     [k,l]=df1.shape
     sum_prediktor=0
     for i in range(k):
