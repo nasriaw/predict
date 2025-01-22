@@ -30,7 +30,7 @@ st.write(f"##### - Ketentuan: ")
    7. Simulasi Prediksi.
 6. Selamat belajar semoga memudahkan untuk memahami statistik regresi.
 '''
-@st.cache
+
 csv = st.file_uploader("#### Upload a file :", type="csv")
 
 if csv is not None:
