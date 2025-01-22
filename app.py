@@ -14,8 +14,10 @@ import pingouin as pg
 
 st.write("# Selamat Datang di Dashboard Analisis Statistik Regresi Linear.")
 st.write("##### author: m nasri aw, email: nasriaw@gmail.com; Des 2024.")
+st.write("# Selamat Datang di Dashboard Analisis Statistik Regresi Linear.")
+st.write("##### author: m nasri aw, email: nasriaw@gmail.com; Des 2024.")
 st.write(f"##### - Ketentuan: ")
-'''
+st.write(f"
 1. Input File: *.csv; dengan kolom di awal sebagai prediktor (X) dan kolom terakhir sebagai prediksi (Y), baris 1 untuk label kolom. Input File di load dari folder kerja maksimal 200 MB dan output dapat didownload ke penyimpan pengguna masing-masing,Tabel dan gambar output dapat didownload di masing-masing properties tabel atau gambar.
 2.Jenis data menggunakan angka atau bilangan integer, data skala lickert bisa digunakan dengan interpretasi sesuai skalanya. 
 3. Menggunakan regresi model Linear Regression dari libray sklearn.linear_model, statsmodels.api dan scipy.stats. Sebaiknya menggunakan data cukup besar (>1000 baris), 80 % untuk training model dan 20 % untuk uji model.
@@ -29,25 +31,13 @@ st.write(f"##### - Ketentuan: ")
    6. Uji Asumsi Regresi Linear dan Uji Validasi Model.
    7. Simulasi Prediksi.
 6. Selamat belajar semoga memudahkan untuk memahami statistik regresi.
-'''
-import pandas as pd
-import streamlit as st
-import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-import statsmodels.api as sm
-import scipy.stats as stats
-import pingouin as pg
-
-st.write("# Selamat Datang di Dashboard Analisis Statistik Regresi Linear.")
-st.write("##### author: m nasri aw, email: nasriaw@gmail.com; Des 2024.")
-st.write(f"##### - Dengan ketentuan: ")
-st.write(f"1. Input File: *.csv; prediktor (X) maksimum 5, prediksi (Y) 1 variabel, baris 1 untuk label kolom.")
-st.write(f"2. jenis data menggunakan angka atau bilangan integer, data skala lickert bisa digunakan dengan interpretasi sesuai skalanya.") 
-st.write(f"3. File di load dari folder kerja maksimal 200 MB dan output dapat didownload ke penyimpan pengguna masing-masing.") 
-st.write(f"4. Tabel dan gambar output dapat didownload di masing-masing properties tabel atau gambar.") 
-st.write(f"5. Pemrograman menggunakan python dengan library dashboard streamlit dan pengolah data, statistik dan library lainnya.") 
+")
+#st.write(f"##### - Dengan ketentuan: ")
+#st.write(f"1. Input File: *.csv; prediktor (X) maksimum 5, prediksi (Y) 1 variabel, baris 1 untuk label kolom.")
+#st.write(f"2. jenis data menggunakan angka atau bilangan integer, data skala lickert bisa digunakan dengan interpretasi sesuai skalanya.") 
+#st.write(f"3. File di load dari folder kerja maksimal 200 MB dan output dapat didownload ke penyimpan pengguna masing-masing.") 
+#st.write(f"4. Tabel dan gambar output dapat didownload di masing-masing properties tabel atau gambar.") 
+#st.write(f"5. Pemrograman menggunakan python dengan library dashboard streamlit dan pengolah data, statistik dan library lainnya.") 
 
 csv = st.file_uploader("#### Upload a file :", type="csv")
 
