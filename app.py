@@ -1,3 +1,35 @@
+"Analisis Statistik Regresi Linear"
+# app.py
+#!/home/nasri/anaconda3/envs/dashboard_env
+# -*- coding: utf-8 -*-
+import pandas as pd
+import streamlit as st
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import statsmodels.api as sm
+import scipy.stats as stats
+import pingouin as pg
+
+st.write("# Selamat Datang di Dashboard Analisis Statistik Regresi Linear.")
+st.write("##### author: m nasri aw, email: nasriaw@gmail.com; Des 2024.")
+st.write(f"##### - Ketentuan: ")
+'''
+1. Input File: *.csv; dengan kolom di awal sebagai prediktor (X) dan kolom terakhir sebagai prediksi (Y), baris 1 untuk label kolom. Input File di load dari folder kerja maksimal 200 MB dan output dapat didownload ke penyimpan pengguna masing-masing,Tabel dan gambar output dapat didownload di masing-masing properties tabel atau gambar.
+2.Jenis data menggunakan angka atau bilangan integer, data skala lickert bisa digunakan dengan interpretasi sesuai skalanya. 
+3. Menggunakan regresi model Linear Regression dari libray sklearn.linear_model, statsmodels.api dan scipy.stats. Sebaiknya menggunakan data cukup besar (>1000 baris), 80 % untuk training model dan 20 % untuk uji model.
+4. Pemrograman menggunakan python dengan library dashboard streamlit dan library pengolah data, statistik dan library lainnya, source bersifat terbuka (opensource) yang dapat di download dari link github penulis. 
+5. Analisis statistik regresi meliputi:
+   1. Diskripsi.
+   2. Korelasi.
+   3. Visual Data.
+   4. Regresi.
+   5. Evaluasi Model.
+   6. Uji Asumsi Regresi Linear dan Uji Validasi Model.
+   7. Simulasi Prediksi.
+6. Selamat belajar semoga memudahkan untuk memahami statistik regresi.
+'''
 import pandas as pd
 import streamlit as st
 import numpy as np
@@ -109,7 +141,7 @@ if "data" in st.session_state:
     r2 = r2_score(ytest, pred)
     st.write(f'- R square : {r2:0.4f}')
 
-    st.write("### 6. Uji Asumsi Regresi, Validasi")
+    st.write("### 6. Uji Asumsi Regresi Linear dan Uji Validasi Model")
     model = LinearRegression()
     model.fit(xtrain, ytrain)
     pred = model.predict(xtest)
