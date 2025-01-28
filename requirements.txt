@@ -2,7 +2,7 @@ streamlit
 pandas 
 numpy
 statsmodels
-statsmodels.formula
+statsmodels.formula.api
 scipy
 scikit-learn
 openpyxl
