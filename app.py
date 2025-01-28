@@ -9,6 +9,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import statsmodels.api as sm
+import statsmodels.formula.api as smf
 import scipy.stats as stats
 import pingouin as pg
 import matplotlib.pyplot as plt
