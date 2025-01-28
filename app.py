@@ -228,40 +228,40 @@ def simulasi_produksi():
     predik2=(model.params)[0] + sum_prediktor
     st.write(f"#### Prediksi {prediksi_y} = {predik2}")
 
-def chart_regresi():
+def regresi_parsial():
     import statistics
     from statistics import linear_regression
-    import statsmodels.formula.api as smf
+    columns=df.columns
     [m,n] =df.shape
     k=n-1
-#     for i in range(k):
-#         fig = px.scatter(
-#             x = df[columns[i]],
-#             y = df[columns[-1]])
-#         st.write(f"#### {i+1}. Scatter Chart: {df.columns[i]} (x) - {df.columns[-1]} (y)")
-#         st.plotly_chart(fig)
     for i in range(k):
-        x = np.array(df[columns[i]])
-        y = np.array(df[columns[-1]])
-        #st.write(f" x: {x}")
-        #st.write(f" f: {y}")
-        
-        X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
-        # menggunakan statsmodels OLS    
+        df1=pd.DataFrame([df[columns[i]],df[columns[-1]]])        
+        x =np.array(df1.iloc[0])
+        y =np.array(df1.iloc[1])
+        st.write(f"#### 5.{i+1}. Evaluation a model : {df.columns[i]} (x) - {df.columns[-1]} (y) = ")
+        st.write(" Data Deskripsi = ")
+        #st.write(df1.T.head(5))
+        st.write(df1.T.describe())
+        # menggunakan statsmodels OLS
+        #x = sm.add_constant(x)
+        #model_ols=sm.OLS(y,x).fit()
         model_ols = smf.ols("y ~ x", data=pd.DataFrame(x,y)).fit()
-        st.write(f"#### 5.{i+1}. Evaluation a model: {df.columns[i]} (x) - {df.columns[-1]} (y) = ")
+        #st.write(f" Parameter model : {model_ols.params}")  # cons (intercept) = {model_ols.params[0]:0.04f} ; coef = {model_ols.params[2]:0.04f}")
+        st.write(model_ols.summary())
+        
         st.write(f" - R-squared = {model_ols.rsquared:0.04f}")
         st.write(f" - MSE = {model_ols.mse_total:0.04f}")
-        #st.write(f" p-values = {model_ols.f_pvalue:0.08f}")
-        st.write(f" - parameter model ols {df.columns[i]} - {df.columns[-1]} = {model_ols.params}")
-        st.write(f" - Intercept = {model_ols.params[0]:0.04f}, coef = {model_ols.params[1]:0.04f}" )
-        st.write(model_ols.summary())
-        #fig = px.plot(X_test, y_pred)
-        st.write(f" Chart {df.columns[i]} - {df.columns[-1]} = ")
-        
-        y1=(model_ols.params[1] * x)+ model_ols.params[0]
-        fig1=px.scatter(x, y1, trendline="ols" )#, color='red', label='Regression line')
-        st.plotly_chart(fig1)
+        st.write(f" - Standard errors =  {(model_ols.bse)}")
+        #st.write(f" - Predicted values =  {model_ols.predict()}")
+               
+        st.write(f"##### Chart {df.columns[i]} - {df.columns[-1]} = ")
+        st.write(f" - Parameter model : intercept = {model_ols.params[0]:0.04f} ; coef = {model_ols.params[1]:0.04f} ")
+        y1=model_ols.params[0] + (model_ols.params[1] * x)
+        fig=px.scatter(
+            y1, x,
+            y, x,
+            trendline ="ols")
+        st.plotly_chart(fig)
         
     
 #main program
