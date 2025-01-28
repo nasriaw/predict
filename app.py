@@ -295,7 +295,7 @@ if "data" in st.session_state:
     regresi()
     
     st.write("### 5. Regresi Linear (Parsial) & Scatter Chart Parsial x-y : ")
-    chart_regresi()
+    regresi_parsial()
 
     st.write("### 6. Evaluasi Model : ")
     evaluasi()
