@@ -15,6 +15,8 @@ import pingouin as pg
 import matplotlib.pyplot as plt
 #from math import sqrt
 import plotly.express as px
+import statistics
+from statistics import linear_regression
 
 
 st.write("## Selamat Datang di Dashboard Analisis Statistik Regresi Linear.")
@@ -52,7 +54,7 @@ def regresi():
     columns=df.columns
     #st.write(model.params)
     #st.write(f"Persamaan Regresi, {columns[5]} = {model.params[0]:0.4f} + {model.params[1]:0.4f} {columns[0]} + {model.params[2]:0.4f} {columns[1]} + {model.params[3]:0.4f} {columns[2]} + {model.params[4]:0.4f} {columns[3]} + {model.params[5]:0.4f} {columns[5]}.")
-    #atau dengan algoritma
+    #untuk > 5 var x, dengan coding spt berikut:
     [m,n] =df.shape
     k=(n-1)
     st.write(f"Persamaan Regresi untuk Prediksi KepuasanKlient = Intercept {model.params[0]:0.04f} + Prediktor : ")
@@ -84,6 +86,39 @@ def regresi():
             st.write(f'- p-value = {model.f_pvalue:0.4f} < 0.05, Menolak H0: artinya semua Prediktor X secara serentak berpengaruh untuk memprediksi {prediksi_y}')
     else:
             st.write(f'- p-value = {model.f_pvalue:0.4f} > 0.05, Menerima H0: artinya semua Prediktor X secara serentak tidak berpengaruh untuk memprediksi {prediksi_y}')
+
+def regresi_parsial():
+    columns=df.columns
+    [m,n] =df.shape
+    k=n-1
+    for i in range(k):
+        df1=pd.DataFrame([df[columns[i]],df[columns[-1]]])        
+        x =np.array(df1.iloc[0])
+        y =np.array(df1.iloc[1])
+        st.write(f"#### 5.{i+1}. Evaluation a model : {df.columns[i]} (x) - {df.columns[-1]} (y) = ")
+        st.write(" Data Deskripsi = ")
+        #st.write(df1.T.head(5))
+        st.write(df1.T.describe())
+        # menggunakan statsmodels OLS
+        #x = sm.add_constant(x)
+        #model_ols=sm.OLS(y,x).fit()
+        model_ols = smf.ols("y ~ x", data=pd.DataFrame(x,y)).fit()
+        #st.write(f" Parameter model : {model_ols.params}")  # cons (intercept) = {model_ols.params[0]:0.04f} ; coef = {model_ols.params[2]:0.04f}")
+        st.write(model_ols.summary())
+        
+        st.write(f" - R-squared = {model_ols.rsquared:0.04f}")
+        st.write(f" - MSE = {model_ols.mse_total:0.04f}")
+        st.write(f" - Standard errors =  {(model_ols.bse)}")
+        #st.write(f" - Predicted values =  {model_ols.predict()}")
+               
+        st.write(f"##### Chart {df.columns[i]} - {df.columns[-1]} = ")
+        st.write(f" - Parameter model : intercept = {model_ols.params[0]:0.04f} ; coef = {model_ols.params[1]:0.04f} ")
+        y1=model_ols.params[0] + (model_ols.params[1] * x)
+        fig=px.scatter(
+            y1, x,
+            y, x,
+            trendline ="ols")
+        st.plotly_chart(fig)
 
 def evaluasi():
     x = df.drop(df.columns[-1],axis=1)
@@ -229,42 +264,6 @@ def simulasi_produksi():
     predik2=(model.params)[0] + sum_prediktor
     st.write(f"#### Prediksi {prediksi_y} = {predik2}")
 
-def regresi_parsial():
-    import statistics
-    from statistics import linear_regression
-    columns=df.columns
-    [m,n] =df.shape
-    k=n-1
-    for i in range(k):
-        df1=pd.DataFrame([df[columns[i]],df[columns[-1]]])        
-        x =np.array(df1.iloc[0])
-        y =np.array(df1.iloc[1])
-        st.write(f"#### 5.{i+1}. Evaluation a model : {df.columns[i]} (x) - {df.columns[-1]} (y) = ")
-        st.write(" Data Deskripsi = ")
-        #st.write(df1.T.head(5))
-        st.write(df1.T.describe())
-        # menggunakan statsmodels OLS
-        #x = sm.add_constant(x)
-        #model_ols=sm.OLS(y,x).fit()
-        model_ols = smf.ols("y ~ x", data=pd.DataFrame(x,y)).fit()
-        #st.write(f" Parameter model : {model_ols.params}")  # cons (intercept) = {model_ols.params[0]:0.04f} ; coef = {model_ols.params[2]:0.04f}")
-        st.write(model_ols.summary())
-        
-        st.write(f" - R-squared = {model_ols.rsquared:0.04f}")
-        st.write(f" - MSE = {model_ols.mse_total:0.04f}")
-        st.write(f" - Standard errors =  {(model_ols.bse)}")
-        #st.write(f" - Predicted values =  {model_ols.predict()}")
-               
-        st.write(f"##### Chart {df.columns[i]} - {df.columns[-1]} = ")
-        st.write(f" - Parameter model : intercept = {model_ols.params[0]:0.04f} ; coef = {model_ols.params[1]:0.04f} ")
-        y1=model_ols.params[0] + (model_ols.params[1] * x)
-        fig=px.scatter(
-            y1, x,
-            y, x,
-            trendline ="ols")
-        st.plotly_chart(fig)
-        
-    
 #main program
 csv = st.file_uploader("#### Upload a file :", type="csv")
 if csv is not None:
