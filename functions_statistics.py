@@ -43,8 +43,8 @@ def open_file():
 def descriptive():
     df=open_file()
     #st.write(f"dimensi data: {df.shape}")
-    st.write("Data Head : ")
-    st.write(df.head())
+    #st.write("Data Head : ")
+    #st.write(df.head())
     st.write("Data Diskripsi : ")
     st.write(df.describe(include='all').fillna("").astype("str"))
 
