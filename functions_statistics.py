@@ -46,7 +46,7 @@ def descriptive():
     #st.write("Data Head : ")
     #st.write(df.head())
     st.write("Data Diskripsi : ")
-    st.write(df.describe())#(include='all').fillna("").astype("str"))
+    st.write(df.describe())
 
 def korelasi():
     df=open_file()
