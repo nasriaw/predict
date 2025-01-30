@@ -17,7 +17,7 @@ DEMOS = OrderedDict(  #membuat objek DEMOS dari class
         #    (
         #        functions_statistics.open_file, None,
         #    ),
-        ),
+        #),
         (
            "1. Data.head() dan Statistik Diskripsi.",
             (
