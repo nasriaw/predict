@@ -24,7 +24,7 @@ st.write("##### author: m nasri aw, email: nasri@stieimlg.ac.id; lecturer at htt
 st.write(f"##### - Ketentuan: ")
 '''
 1. Input File: jenis file *.csv; Jika jenis spreadsheet (.*xlxs) di save as *.csv atau convert ke *.csv.
-2. Kolom-kolom di awal sebagai prediktor (Xi) dan kolom yang terakhir sebagai prediksi (Y), baris 1 untuk label kolom. Input File di load dari folder kerja maksimal 200 MB dan output dapat didownload ke penyimpan pengguna masing-masing,Tabel dan gambar output dapat didownload di masing-masing properties tabel atau gambar.
+2. Kolom-kolom di awal sebagai prediktor (Xi) dan kolom yang terakhir sebagai prediksi (Y), baris 1 untuk label kolom. Input File di load dari folder kerja maksimal 200 MB dan output dapat didownload ke penyimpan pengguna masing-masing. Tabel dan gambar output dapat didownload di masing-masing properties tabel atau gambar.
 3. Jenis data menggunakan angka atau bilangan integer, data skala lickert bisa digunakan dengan interpretasi sesuai skalanya. 
 4. Menggunakan regresi model Linear Regression dari libray sklearn.linear_model, statsmodels.api dan scipy.stats. Sebaiknya menggunakan data cukup besar (>1000 baris), 80 % untuk training model dan 20 % untuk uji model.
 5. Pemrograman menggunakan python dengan library streamlit dan library pengolah data, statistik dan library lainnya, source bersifat terbuka (opensource) yang dapat di download dari link github penulis. 
