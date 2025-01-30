@@ -38,8 +38,8 @@ def open_file():
         #st.write(f"dimensi data: {df.shape}")
         #st.write("data head : ")
         #st.write(df.head()) 
-    #return df
-df=open_file()
+    return df
+df=df
 def descriptive():
     #df=open_file()
     #st.write(f"dimensi data: {df.shape}")
