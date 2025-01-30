@@ -12,11 +12,11 @@ LOGGER = get_logger(__name__) # constructor, properties class didefinisikan dala
 DEMOS = OrderedDict(  #membuat objek DEMOS dari class
     [
       ("Introduksi.", (functions_statistics.intro, None)),
-        (
-            "Upload File.",
-            (
-                functions_statistics.open_file, None,
-            ),
+        #(
+        #    "Upload File.",
+        #    (
+        #        functions_statistics.open_file, None,
+        #    ),
         ),
         (
            "1. Data.head() dan Statistik Diskripsi.",
