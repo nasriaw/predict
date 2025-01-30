@@ -38,7 +38,7 @@ if "data" in st.session_state:
         #st.write(f"dimensi data: {df.shape}")
         #st.write("data head : ")
         #st.write(df.head()) 
-df=data
+
 def descriptive():
     #df=open_file()
     #st.write(f"dimensi data: {df.shape}")
