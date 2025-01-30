@@ -26,20 +26,19 @@ def intro():
     Selamat Datang
     '''
 
-def open_file():
-    csv = st.file_uploader("file ekstensi:  *.csv", type="csv")
-    if csv is not None:
-        df = pd.read_csv(csv)
-        st.session_state["data"] = df
+
+csv = st.file_uploader("file ekstensi:  *.csv", type="csv")
+if csv is not None:
+    df = pd.read_csv(csv)
+    st.session_state["data"] = df
         
-    if "data" in st.session_state:
-        df = st.session_state["data"]
+if "data" in st.session_state:
+    df = st.session_state["data"]
 
         #st.write(f"dimensi data: {df.shape}")
         #st.write("data head : ")
         #st.write(df.head()) 
-    return df
-df=df
+
 def descriptive():
     #df=open_file()
     #st.write(f"dimensi data: {df.shape}")
