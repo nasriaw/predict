@@ -19,7 +19,7 @@ import statistics
 from statistics import linear_regression
 
 
-st.write("## Selamat Datang di Dashboard Analisis Statistik Regresi Linear.")
+st.write("## Selamat Datang di Dashboard Analisis Statistik Regresi Linear."  👋   👋)
 st.write("##### author: m nasri aw, email: nasri@stieimlg.ac.id; lecturer at https://www.stieimlg.ac.id/; Des 2024.")
 st.write(f"##### - Ketentuan: ")
 '''
