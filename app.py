@@ -100,8 +100,8 @@ def evaluasi():
     pred = model.predict(xtest)
     mse = mean_squared_error(ytest,pred)
     st.write(f"- MSE: {mse:0.4f}")
-    rmse=mean_squared_error(ytest, pred, squared=False)
-    st.write(f"-  RMSE: {rmse:0.4f}")
+    #rmse=mean_squared_error(ytest, pred, squared=False)
+    #st.write(f"-  RMSE: {rmse:0.4f}")
     mae = mean_absolute_error(ytest, pred)
     st.write(f"-  MAE: {mae:0.4f}")
     # R_square
