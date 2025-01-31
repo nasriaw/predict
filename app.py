@@ -61,8 +61,7 @@ def intro():
        6. Evaluasi Model.
        7. Uji Asumsi Regresi Linear dan Uji Validasi Model.
        8. Simulasi Prediksi.
-       ###### 👈 Pilih Menu di sebelah
-       Pastikan data telah di upload (langkah ke-2: Upload File)
+       ###### 👈 Pilih Menu di sebelah; Pastikan data telah di upload (langkah ke-2: Upload File)
     7. Untuk link demo silahkan klik https://huggingface.co/spaces/nasriaw/regresi_linear; Selamat belajar semoga memudahkan untuk memahami statistik regresi.
     '''
     return intro
