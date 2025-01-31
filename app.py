@@ -67,17 +67,18 @@ def intro():
     return intro
 
 def open_file():
-    csv = st.file_uploader("#### file ekstensi:  *.csv", type="csv")
-    if csv is not None:
-        df = pd.read_csv(csv)
-        st.session_state["data"] = df
-        
-    if "data" in st.session_state:
-        df = st.session_state["data"]
+    if 'data' not in st.session_state:
+        st.session_state.data = None
 
-        #st.write(f"dimensi data: {df.shape}")
-        #st.write("data head : ")
-        #st.write(df.head()) 
+    def load_data():
+        st.session_state.data = pd.read_csv(st.session_state.loader)
+
+    file = st.file_uploader('Choose a file', type='csv', key='loader', on_change=load_data)
+
+    df = st.session_state.data
+    if df is not None:
+        # Run program
+        st.write('Gunakan Browse Files jika upload data baru.')
     return df
 #df=open_file()
 
