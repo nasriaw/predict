@@ -1,45 +1,110 @@
-"Analisis Statistik Regresi Linear"
+'''
+Analisis Statistik Regresi Linear
 # app.py
 #!/home/nasri/anaconda3/envs/dashboard_env
 # -*- coding: utf-8 -*-
-import pandas as pd
+'''
+# Import libraries
 import streamlit as st
-import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+from sklearn.metrics import r2_score, mean_squared_error, mean_absolute_error
+import numpy as np
+import scipy.stats as stats
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
-import scipy.stats as stats
-import pingouin as pg
-import matplotlib.pyplot as plt
-#from math import sqrt
 import plotly.express as px
-import statistics
-from statistics import linear_regression
+from sklearn.linear_model import LinearRegression
 
+features=[
+    "Introduksi",
+    "Upload File",
+    "Data head dan Statistik Diskripsi",
+    "Korelasi",
+    "Visual Data",
+    "Regresi Multi Linear",
+    "Regresi Linear (Parsial), Scatter Chart dan Garis Regresi",
+    "Evaluasi Model",
+    "Uji Asumsi Regresi Linear dan Uji Validasi Model",
+    "Simulasi Prediksi",
+    ]
+menu=pd.DataFrame(features)
+#st.write(menu)
+#[m,n] =menu.shape
+#st.write(m,n)
+#st.sidebar.image("logo_stiei.jpg", use_column_width=False)
+st.sidebar.markdown('<h5 style="color: white;"> Author: Nasri </h5>', unsafe_allow_html=True)
+st.sidebar.markdown('<h1 style="color: yellow;">Analisis Statistik Regresi Linear</h1>', unsafe_allow_html=True)
 
-st.write("## Selamat Datang di Dashboard Analisis Statistik Regresi Linear.  👋   👋 ")
-st.write("##### author: m nasri aw, email: nasri@stieimlg.ac.id; lecturer at https://www.stieimlg.ac.id/; Des 2024.")
-st.write(f"##### - Ketentuan: ")
-'''
-1. Input File: jenis file *.csv; Jika jenis spreadsheet (.*xlxs) di save as *.csv atau convert ke *.csv.
-2. Kolom-kolom di awal sebagai prediktor (Xi) dan kolom yang terakhir sebagai prediksi (Y), baris 1 untuk label kolom. Input File di load dari folder kerja maksimal 200 MB dan output dapat didownload ke penyimpan pengguna masing-masing. Tabel dan gambar output dapat didownload di masing-masing properties tabel atau gambar.
-3. Jenis data menggunakan angka atau bilangan integer, data skala lickert bisa digunakan dengan interpretasi sesuai skalanya. 
-4. Menggunakan regresi model Linear Regression dari libray sklearn.linear_model, statsmodels.api dan scipy.stats. Sebaiknya menggunakan data cukup besar (>1000 baris), 80 % untuk training model dan 20 % untuk uji model.
-5. Pemrograman menggunakan python dengan library streamlit dan library pengolah data, statistik dan library lainnya, source bersifat terbuka (opensource) yang dapat di download dari link github penulis. 
-6. Analisis statistik regresi meliputi:
-   1. Diskripsi.
-   2. Korelasi.
-   3. Visual Data.
-   4. Regresi Multi Linear.
-   5. Regresi Linear (Parsial) & Scatter Chart Parsial x-y. 
-   6. Evaluasi Model.
-   7. Uji Asumsi Regresi Linear dan Uji Validasi Model.
-   8. Simulasi Prediksi.
-7. Untuk link demo silahkan klik https://huggingface.co/spaces/nasriaw/regresi_linear; Selamat belajar semoga memudahkan untuk memahami statistik regresi.
-'''
+model_analisis = st.sidebar.radio('Pilih Analisis Statistik', menu)
+
+def intro():
+    st.write("## Selamat Datang di Dashboard Analisis Statistik Regresi Linear.  👋  👋")
+    st.write("##### author: m nasri aw, email: nasri@stieimlg.ac.id; lecturer at https://www.stieimlg.ac.id/; Des 2024.")
+    st.write(f"##### - Ketentuan: ")
+    '''
+    1. Input File: jenis file *.csv; Jika jenis spreadsheet (.*xlxs) di save as *.csv atau convert ke *.csv.
+    2. Kolom-kolom di awal sebagai prediktor (Xi) dan kolom yang terakhir sebagai prediksi (Y), baris 1 untuk label kolom. Input File di load dari folder kerja maksimal 200 MB dan output dapat didownload ke penyimpan pengguna masing-masing. Tabel dan gambar output dapat didownload di masing-masing properties tabel atau gambar.
+    3. Jenis data menggunakan angka atau bilangan integer, data skala lickert bisa digunakan dengan interpretasi sesuai skalanya. 
+    4. Menggunakan regresi model Linear Regression dari libray sklearn.linear_model, statsmodels.api dan scipy.stats. Sebaiknya menggunakan data cukup besar (>1000 baris), 80 % untuk training model dan 20 % untuk uji model.
+    5. Pemrograman menggunakan python dengan library streamlit dan library pengolah data, statistik dan library lainnya, source bersifat terbuka (opensource) yang dapat di download dari link github penulis. 
+    6. Analisis statistik regresi meliputi:
+       1. Diskripsi.
+       2. Korelasi.
+       3. Visual Data.
+       4. Regresi Multi Linear.
+       5. Regresi Linear (Parsial) & Scatter Chart Parsial x-y. 
+       6. Evaluasi Model.
+       7. Uji Asumsi Regresi Linear dan Uji Validasi Model.
+       8. Simulasi Prediksi.
+       ###### 👈 Pilih Menu di sebelah
+    7. Untuk link demo silahkan klik https://huggingface.co/spaces/nasriaw/regresi_linear; Selamat belajar semoga memudahkan untuk memahami statistik regresi.
+    '''
+    return intro
+
+def open_file():
+    csv = st.file_uploader("file ekstensi:  *.csv", type="csv")
+    if csv is not None:
+        df = pd.read_csv(csv)
+        st.session_state["data"] = df
+        
+    if "data" in st.session_state:
+        df = st.session_state["data"]
+
+        #st.write(f"dimensi data: {df.shape}")
+        #st.write("data head : ")
+        #st.write(df.head()) 
+    return df
+#df=open_file()
+
+def descriptive():
+    df=open_file()
+    st.write(f"dimensi data: {df.shape}")
+    st.write("Data Head : ")
+    st.write(df.head())
+    st.write("Data Diskripsi : ")
+    st.write(df.describe(include='all').fillna("").astype("str"))
+
+def korelasi():
+    df=open_file()
+    st.write(f"dimensi data: {df.shape}")
+    st.write(df.corr())
+    
+def visual_data():
+    df=open_file()
+    columns=df.columns
+        #x = data.drop(data.columns[-1],axis=1)
+        #y = data.iloc[:,-1:]
+    for i in columns:
+        st.write(f"##### Chart {(i)}")
+        st.bar_chart(df[i]) #scatter, bar, line, area, altair
+
 def regresi():
+    df=open_file()
+    st.write(f"dimensi data: {df.shape}")
     x = df.drop(df.columns[-1],axis=1)
     y = df.iloc[:,-1:]
     xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.2, random_state=42)
@@ -87,7 +152,42 @@ def regresi():
     else:
             st.write(f'- p-value = {model.f_pvalue:0.4f} > 0.05, Menerima H0: artinya semua Prediktor X secara serentak tidak berpengaruh untuk memprediksi {prediksi_y}')
 
+def regresi_parsial():
+    df=open_file()
+    columns=df.columns
+    [m,n] =df.shape
+    k=n-1
+    for i in range(k):
+        df1=pd.DataFrame([df[columns[i]],df[columns[-1]]])        
+        x =np.array(df1.iloc[0])
+        y =np.array(df1.iloc[1])
+        st.write(f"#### 5.{i+1}. Evaluation a model : {df.columns[i]} (x) - {df.columns[-1]} (y) = ")
+        st.write(" Data Deskripsi = ")
+        #st.write(df1.T.head(5))
+        st.write(df1.T.describe())
+        # menggunakan statsmodels OLS
+        #x = sm.add_constant(x)
+        #model_ols=sm.OLS(y,x).fit()
+        model_ols = smf.ols("y ~ x", data=pd.DataFrame(x,y)).fit()
+        #st.write(f" Parameter model : {model_ols.params}")  # cons (intercept) = {model_ols.params[0]:0.04f} ; coef = {model_ols.params[2]:0.04f}")
+        st.write(model_ols.summary())
+        
+        st.write(f" - R-squared = {model_ols.rsquared:0.04f}")
+        st.write(f" - MSE = {model_ols.mse_total:0.04f}")
+        st.write(f" - Standard errors =  {(model_ols.bse)}")
+        #st.write(f" - Predicted values =  {model_ols.predict()}")
+               
+        st.write(f"##### Chart: {df.columns[i]} - {df.columns[-1]}, dan Garis Regresi Linear = ")
+        st.write(f" - Parameter model : intercept = {model_ols.params[0]:0.04f} ; coef = {model_ols.params[1]:0.04f} ")
+        y1=model_ols.params[0] + (model_ols.params[1] * x)
+        fig=px.scatter(
+            y1, x,
+            y, x,
+            trendline ="ols")
+        st.plotly_chart(fig)
+
 def evaluasi():
+    df=open_file()
     x = df.drop(df.columns[-1],axis=1)
     y = df.iloc[:,-1:]
     
@@ -100,8 +200,8 @@ def evaluasi():
     pred = model.predict(xtest)
     mse = mean_squared_error(ytest,pred)
     st.write(f"- MSE: {mse:0.4f}")
-    #rmse=mean_squared_error(ytest, pred, squared=False)
-    #st.write(f"-  RMSE: {rmse:0.4f}")
+    rmse=mean_squared_error(ytest, pred, squared=False)
+    st.write(f"-  RMSE: {rmse:0.4f}")
     mae = mean_absolute_error(ytest, pred)
     st.write(f"-  MAE: {mae:0.4f}")
     # R_square
@@ -110,6 +210,7 @@ def evaluasi():
     st.write(f'- R square : {r2:0.4f}')
         
 def uji_asumsi():
+    df=open_file()
     x = df.drop(df.columns[-1],axis=1)
     y = df.iloc[:,-1:]
     xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.2, random_state=42)
@@ -202,6 +303,7 @@ def uji_asumsi():
         st.write(f'- cronbach alpha average: {cronbach} < 0.5 : Internal consistensi instrumen penelitian dinyatakan: Unacceptable')
     
 def simulasi_produksi():
+    df=open_file()
     x = df.drop(df.columns[-1],axis=1)
     y = df.iloc[:,-1:]
     xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.2, random_state=42)
@@ -231,78 +333,23 @@ def simulasi_produksi():
     predik2=(model.params)[0] + sum_prediktor
     st.write(f"#### Prediksi {prediksi_y} = {predik2}")
 
-def regresi_parsial():
-    columns=df.columns
-    [m,n] =df.shape
-    k=n-1
-    for i in range(k):
-        df1=pd.DataFrame([df[columns[i]],df[columns[-1]]])        
-        x =np.array(df1.iloc[0])
-        y =np.array(df1.iloc[1])
-        st.write(f"#### 5.{i+1}. Evaluation a model : {df.columns[i]} (x) - {df.columns[-1]} (y) = ")
-        st.write(" Data Deskripsi = ")
-        #st.write(df1.T.head(5))
-        st.write(df1.T.describe())
-        # menggunakan statsmodels OLS
-        #x = sm.add_constant(x)
-        #model_ols=sm.OLS(y,x).fit()
-        model_ols = smf.ols("y ~ x", data=pd.DataFrame(x,y)).fit()
-        #st.write(f" Parameter model : {model_ols.params}")  # cons (intercept) = {model_ols.params[0]:0.04f} ; coef = {model_ols.params[2]:0.04f}")
-        st.write(model_ols.summary())
-        
-        st.write(f" - R-squared = {model_ols.rsquared:0.04f}")
-        st.write(f" - MSE = {model_ols.mse_total:0.04f}")
-        st.write(f" - Standard errors =  {(model_ols.bse)}")
-        #st.write(f" - Predicted values =  {model_ols.predict()}")
-               
-        st.write(f"##### Chart {df.columns[i]} - {df.columns[-1]} = ")
-        st.write(f" - Parameter model : intercept = {model_ols.params[0]:0.04f} ; coef = {model_ols.params[1]:0.04f} ")
-        y1=model_ols.params[0] + (model_ols.params[1] * x)
-        fig=px.scatter(
-            y1, x,
-            y, x,
-            trendline ="ols")
-        st.plotly_chart(fig)
-    
-#main program
-csv = st.file_uploader("#### Upload a file :", type="csv")
-if csv is not None:
-    df = pd.read_csv(csv)
-    st.session_state["data"] = df
-
-if "data" in st.session_state:
-    df = st.session_state["data"]
-
-    st.write(f"dimensi data: {df.shape}")
-    st.write("data head : ")
-    st.write(df.head())
-
-    st.write("### 1. Diskripsi Data:")
-    st.write(df.describe(include='all').fillna("").astype("str"))
-    
-    st.write("### 2. Korelasi Data:")
-    st.write(df.corr())
-    
-    st.write("### 3. Visual Data:")
-    columns=df.columns
-        #x = data.drop(data.columns[-1],axis=1)
-        #y = data.iloc[:,-1:]
-    for i in columns:
-        st.write(f"##### Chart {(i)}")
-        st.bar_chart(df[i]) #scatter, bar, line, area, altair
-
-    st.write("### 4. Regresi Multi Linear: ")
+if model_analisis == "Introduksi":
+    intro()
+elif model_analisis == "Upload File":
+    open_file()
+elif model_analisis == "Data head dan Statistik Diskripsi":
+    descriptive()
+elif model_analisis == "Korelasi":
+    korelasi()
+elif model_analisis == "Visual Data":
+    visual_data()
+elif model_analisis == "Regresi Multi Linear":
     regresi()
-    
-    st.write("### 5. Regresi Linear (Parsial) & Scatter Chart Parsial x-y : ")
+elif model_analisis == "Regresi Linear (Parsial), Scatter Chart dan Garis Regresi":
     regresi_parsial()
-
-    st.write("### 6. Evaluasi Model : ")
+elif model_analisis == "Evaluasi Model":
     evaluasi()
-    
-    st.write("### 7. Uji Asumsi Regresi Linear dan Uji Validasi Model")
+elif model_analisis == "Uji Asumsi Regresi Linear dan Uji Validasi Model":
     uji_asumsi()
-    
-    st.write("### 8. Simulai Prediksi : ")
-    # menggunakan statsmodels OLS
+else:
     simulasi_produksi()
