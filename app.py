@@ -27,7 +27,7 @@ features=[
     "Korelasi",
     "Visual Data",
     "Regresi Multi Linear",
-    "Regresi Linear (Parsial), Scatter Chart dan Garis Regresi",
+    "Regresi Linear (Parsial), Scatter Chart dan Garis Regresi x-y",
     "Evaluasi Model",
     "Uji Asumsi Regresi Linear dan Uji Validasi Model",
     "Simulasi Prediksi",
@@ -58,7 +58,7 @@ def intro():
        2. Korelasi.
        3. Visual Data.
        4. Regresi Multi Linear.
-       5. Regresi Linear (Parsial), Scatter Chart Parsial dan Garis Regreasi x-y. 
+       5. Regresi Linear (Parsial), Scatter Chart Parsial dan Garis Regresi x-y. 
        6. Evaluasi Model.
        7. Uji Asumsi Regresi Linear dan Uji Validasi Model.
        8. Simulasi Prediksi.
@@ -356,7 +356,7 @@ elif model_analisis == "Visual Data":
     visual_data()
 elif model_analisis == "Regresi Multi Linear":
     regresi()
-elif model_analisis == "Regresi Linear (Parsial), Scatter Chart dan Garis Regresi":
+elif model_analisis == "Regresi Linear (Parsial), Scatter Chart dan Garis Regresi x-y":
     regresi_parsial()
 elif model_analisis == "Evaluasi Model":
     evaluasi()
