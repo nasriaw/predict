@@ -38,6 +38,7 @@ menu=pd.DataFrame(features)
 #st.write(m,n)
 #st.sidebar.image("logo_stiei.jpg", use_column_width=False)
 st.sidebar.markdown('<h5 style="color: white;"> Author: Nasri </h5>', unsafe_allow_html=True)
+st.sidebar.markdown('<h5 style="color: white;"> Author: email: nasri@stieimlg.ac.id </h5>', unsafe_allow_html=True)
 st.sidebar.markdown('<h1 style="color: yellow;">Analisis Statistik Regresi Linear</h1>', unsafe_allow_html=True)
 
 model_analisis = st.sidebar.radio('Pilih Analisis Statistik', menu)
