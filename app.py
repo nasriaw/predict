@@ -17,6 +17,7 @@ import scipy.stats as stats
 import statsmodels.api as sm
 import statsmodels.formula.api as smf
 import plotly.express as px
+import pingouin as pg
 from sklearn.linear_model import LinearRegression
 
 features=[
