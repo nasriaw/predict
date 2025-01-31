@@ -166,7 +166,7 @@ def regresi_parsial():
         df1=pd.DataFrame([df[columns[i]],df[columns[-1]]])        
         x =np.array(df1.iloc[0])
         y =np.array(df1.iloc[1])
-        st.write(f"#### 5.{i+1}. Regresi : {df.columns[i]} (x) - {df.columns[-1]} (y) = ")
+        st.write(f"#### 5.{i+1}. Regresi : {df.columns[i]} (x) - {df.columns[-1]} (y). ")
         st.write(" Data Deskripsi = ")
         #st.write(df1.T.head(5))
         st.write(df1.T.describe())
