@@ -161,7 +161,7 @@ def regresi():
 
 def regresi_parsial():
     df=open_file()
-    st.write("### 5. Regresi Linear (Parsial), Scatter Chart Parsial dan Garis Regreasi x-y.")
+    st.write("### 5. Regresi Linear (Parsial), Scatter Chart Parsial dan Garis Regresi x-y.")
     columns=df.columns
     [m,n] =df.shape
     k=n-1
