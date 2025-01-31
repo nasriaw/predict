@@ -41,7 +41,7 @@ st.sidebar.markdown('<h3 style="color: white;"> Author: Nasri </h3>', unsafe_all
 st.sidebar.markdown('<h5 style="color: white;"> email: nasri@stieimlg.ac.id </h5>', unsafe_allow_html=True)
 st.sidebar.markdown('<h1 style="color: yellow;">Analisis Statistik Regresi Linear</h1>', unsafe_allow_html=True)
 
-model_analisis = st.sidebar.radio('Pilih Analisis Statistik', menu)
+model_analisis = st.sidebar.radio('Baca ketentuan penggunaan dengan seksama, Pilih Analisis Statistik:', menu)
 
 def intro():
     st.write("## Selamat Datang di Dashboard Analisis Statistik Regresi Linear.  👋  👋")
