@@ -106,8 +106,8 @@ def visual_data():
         st.bar_chart(df[i]) #scatter, bar, line, area, altair
 
 def regresi():
-    st.write("### 4. Regresi Multi Linear.")
     df=open_file()
+    st.write("### 4. Regresi Multi Linear.")
     st.write(f"dimensi data: {df.shape}")
     x = df.drop(df.columns[-1],axis=1)
     y = df.iloc[:,-1:]
