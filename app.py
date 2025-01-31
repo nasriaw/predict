@@ -56,7 +56,7 @@ def intro():
        2. Korelasi.
        3. Visual Data.
        4. Regresi Multi Linear.
-       5. Regresi Linear (Parsial) & Scatter Chart Parsial x-y. 
+       5. Regresi Linear (Parsial), Scatter Chart Parsial dan Garis Regreasi x-y. 
        6. Evaluasi Model.
        7. Uji Asumsi Regresi Linear dan Uji Validasi Model.
        8. Simulasi Prediksi.
@@ -66,7 +66,7 @@ def intro():
     return intro
 
 def open_file():
-    csv = st.file_uploader("file ekstensi:  *.csv", type="csv")
+    csv = st.file_uploader("#### file ekstensi:  *.csv", type="csv")
     if csv is not None:
         df = pd.read_csv(csv)
         st.session_state["data"] = df
@@ -82,6 +82,7 @@ def open_file():
 
 def descriptive():
     df=open_file()
+    st.write("### 1. Data Head dan Statistik Diskripsi.")
     st.write(f"dimensi data: {df.shape}")
     st.write("Data Head : ")
     st.write(df.head())
@@ -90,11 +91,13 @@ def descriptive():
 
 def korelasi():
     df=open_file()
+    st.write("### 2. Korelasi.")
     st.write(f"dimensi data: {df.shape}")
     st.write(df.corr())
     
 def visual_data():
     df=open_file()
+    st.write("### 3. Visual Data.")
     columns=df.columns
         #x = data.drop(data.columns[-1],axis=1)
         #y = data.iloc[:,-1:]
@@ -103,6 +106,7 @@ def visual_data():
         st.bar_chart(df[i]) #scatter, bar, line, area, altair
 
 def regresi():
+    st.write("### 4. Regresi Multi Linear.")
     df=open_file()
     st.write(f"dimensi data: {df.shape}")
     x = df.drop(df.columns[-1],axis=1)
@@ -154,6 +158,7 @@ def regresi():
 
 def regresi_parsial():
     df=open_file()
+    st.write("### 5. Regresi Linear (Parsial), Scatter Chart Parsial dan Garis Regreasi x-y.")
     columns=df.columns
     [m,n] =df.shape
     k=n-1
@@ -188,6 +193,7 @@ def regresi_parsial():
 
 def evaluasi():
     df=open_file()
+    st.write("### 6. Evaluasi Model.")
     x = df.drop(df.columns[-1],axis=1)
     y = df.iloc[:,-1:]
     
@@ -211,6 +217,7 @@ def evaluasi():
         
 def uji_asumsi():
     df=open_file()
+    st.write("### 7. Uji Asumsi Regresi Linear dan Uji Validasi Model.")
     x = df.drop(df.columns[-1],axis=1)
     y = df.iloc[:,-1:]
     xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.2, random_state=42)
@@ -302,8 +309,9 @@ def uji_asumsi():
     else:
         st.write(f'- cronbach alpha average: {cronbach} < 0.5 : Internal consistensi instrumen penelitian dinyatakan: Unacceptable')
     
-def simulasi_produksi():
+def simulasi_prediksi():
     df=open_file()
+    st.write("### 8. Simulasi Prediksi.")
     x = df.drop(df.columns[-1],axis=1)
     y = df.iloc[:,-1:]
     xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size=0.2, random_state=42)
@@ -352,4 +360,4 @@ elif model_analisis == "Evaluasi Model":
 elif model_analisis == "Uji Asumsi Regresi Linear dan Uji Validasi Model":
     uji_asumsi()
 else:
-    simulasi_produksi()
+    simulasi_prediksi()
