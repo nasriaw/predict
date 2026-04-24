@@ -87,11 +87,15 @@ def descriptive():
     df=open_file()
     st.write("### 1. Data Head dan Statistik Diskripsi.")
     st.write(f"dimensi data: {df.shape}")
-    st.write("Data Head : ")
+    st.write("#### Data Head : ")
     st.write(df.head())
-    st.write("Data Diskripsi : ")
+    st.write("#### Data Diskripsi : ")
     st.write(df.describe(include='all').fillna("").astype("str"))
-
+    st.write("#### Nilai Skewness dan Kurtosis tiap variabel:")
+    columns = df.columns
+    for i in columns:
+        st.write(f"{i}: Skewness : {df[i].skew():.3f};", f"Kurtosis : {df[i].kurtosis():.3f}")
+        
 def korelasi():
     df=open_file()
     st.write("### 2. Korelasi.")
@@ -131,20 +135,20 @@ def visual_data():
     columns = df.columns
     st.write("##### Boxplot")
     fig, ax = plt.subplots()
-    sns.boxplot(data=df[columns], orient='h', ax=ax)  # Fix: Use df[columns] for data, not just columns
-    st.pyplot(fig)  # Use st.pyplot instead of plt.show()
+    sns.boxplot(data=df[columns], orient='h', ax=ax)  # 
+    st.pyplot(fig)  # 
     #visual: violinplot
     columns = df.columns
     st.write("##### Violinplot")
     fig, ax = plt.subplots()
-    sns.violinplot(data=df[columns], orient='h', ax=ax)  # Fix: Use df[columns] for data, not just columns
-    st.pyplot(fig)  # Use st.pyplot instead of plt.show()
+    sns.violinplot(data=df[columns], orient='h', ax=ax)  # 
+    st.pyplot(fig)  # 
     # boxplot tiap variabel
     for i in columns:
         st.write(f"##### Boxplot {i}")
         fig, ax = plt.subplots()
         sns.boxplot(data=df[i], orient='h', ax=ax)
-        st.pyplot(fig)  # Use st.pyplot instead of plt.show()
+        st.pyplot(fig)  #
 
 def regresi():
     df=open_file()
