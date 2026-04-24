@@ -150,6 +150,13 @@ def visual_data():
         fig, ax = plt.subplots()
         sns.boxplot(data=df[i], orient='h', ax=ax)
         st.pyplot(fig)  #
+        st.write(f"{i}: Min : {np.min(df[i]):.2f};", 
+        f"Q1 : {np.percentile(df[i],25):.2f};",
+        f"Q2 : {np.percentile(df[i],50):.2f};",
+        f"Q3 : {np.percentile(df[i],75):.2f};",
+        f"Max : {np.max(df[i]):.2f};",
+        f"IRQ (Inter Quartile Range) : {(np.percentile(df[i],75)-np.percentile(df[i],25)):.2f};"
+        )
 
 def regresi():
     df=open_file()
