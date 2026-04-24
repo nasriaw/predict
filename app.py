@@ -125,6 +125,7 @@ def visual_data():
         fig, ax = plt.subplots()
         sns.histplot(data=df[i], kde=True, color="y", ax=ax)
         st.pyplot(fig)
+        st.write(f"{i}: Skewness : {df[i].skew():.3f};", f"Kurtosis : {df[i].kurtosis():.3f}")
     
     # pairplot
     st.write("##### Pairplot")
