@@ -107,13 +107,21 @@ def visual_data():
     for i in columns:
         st.write(f"##### Chart {(i)}")
         st.bar_chart(df[i]) #scatter, bar, line, area, altair
-    # histogram
+    # histogram, Melt
     st.write("##### Melting data untuk visual histogram dengan seaborn.")
     nd = pd.melt(df, value_vars =df )
     n1 = sns.FacetGrid (nd, col='variable', col_wrap=3, sharex=False, sharey = False)
     n1 = n1.map(sns.histplot, 'value')
     st.pyplot(n1)
 
+    # Distribusi data plot
+    st.write("##### Distribusi data plot")
+    for i in columns:
+        st.write(f"##### Distribusi Plot {i}")
+        fig, ax = plt.subplots()
+        sns.histplot(data=df[i], kde=True, color="y", ax=ax)
+        st.pyplot(fig)
+    
     # pairplot
     st.write("##### Pairplot")
     fig = sns.pairplot(df).fig
