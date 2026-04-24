@@ -39,12 +39,12 @@ menu=pd.DataFrame(features)
 #st.sidebar.image("logo_stiei.jpg", use_column_width=False)
 st.sidebar.markdown('<h3 style="color: Black;"> Author: Nasri </h3>', unsafe_allow_html=True)
 st.sidebar.markdown('<h5 style="color: Black;"> email: nasri@stieimlg.ac.id </h5>', unsafe_allow_html=True)
-st.sidebar.markdown('<h1 style="color: Black;">Analisis Statistik Regresi Linear</h1>', unsafe_allow_html=True)
+st.sidebar.markdown('<h1 style="color: Black;">Template Analisis Statistik Regresi Linear</h1>', unsafe_allow_html=True)
 
 model_analisis = st.sidebar.radio('Baca ketentuan penggunaan dengan seksama, Pilih Analisis Statistik:', menu)
 
 def intro():
-    st.write("## Selamat Datang di Dashboard Analisis Statistik Regresi Linear.  👋  👋")
+    st.write("## Selamat Datang di Template Analisis Statistik Regresi Linear.  👋  👋")
     st.write("##### author: m nasri aw, email: nasri@stieimlg.ac.id; lecturer at https://www.stieimlg.ac.id/; Des 2024.")
     st.write(f"##### - Ketentuan: ")
     '''
