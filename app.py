@@ -133,6 +133,12 @@ def visual_data():
     fig, ax = plt.subplots()
     sns.boxplot(data=df[columns], orient='h', ax=ax)  # Fix: Use df[columns] for data, not just columns
     st.pyplot(fig)  # Use st.pyplot instead of plt.show()
+    #visual: violinplot
+    columns = df.columns
+    st.write("##### Violinplot")
+    fig, ax = plt.subplots()
+    sns.violinplot(data=df[columns], orient='h', ax=ax)  # Fix: Use df[columns] for data, not just columns
+    st.pyplot(fig)  # Use st.pyplot instead of plt.show()
     # boxplot tiap variabel
     for i in columns:
         st.write(f"##### Boxplot {i}")
