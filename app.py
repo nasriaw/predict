@@ -107,6 +107,30 @@ def visual_data():
     for i in columns:
         st.write(f"##### Chart {(i)}")
         st.bar_chart(df[i]) #scatter, bar, line, area, altair
+    # histogram
+    st.write("##### Melting data untuk visual histogram dengan seaborn.")
+    nd = pd.melt(df, value_vars =df )
+    n1 = sns.FacetGrid (nd, col='variable', col_wrap=3, sharex=False, sharey = False)
+    n1 = n1.map(sns.histplot, 'value')
+    st.pyplot(n1)
+
+    # pairplot
+    st.write("##### Pairplot")
+    fig = sns.pairplot(df).fig
+    st.pyplot(fig) 
+
+    # visual boxplot
+    columns = df.columns
+    st.write("##### Boxplot")
+    fig, ax = plt.subplots()
+    sns.boxplot(data=df[columns], orient='h', ax=ax)  # Fix: Use df[columns] for data, not just columns
+    st.pyplot(fig)  # Use st.pyplot instead of plt.show()
+    # boxplot tiap variabel
+    for i in columns:
+        st.write(f"##### Boxplot {i}")
+        fig, ax = plt.subplots()
+        sns.boxplot(data=df[i], orient='h', ax=ax)
+        st.pyplot(fig)  # Use st.pyplot instead of plt.show()
 
 def regresi():
     df=open_file()
