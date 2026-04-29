@@ -101,6 +101,11 @@ def korelasi():
     st.write("### 2. Korelasi.")
     st.write(f"dimensi data: {df.shape}")
     st.write(df.corr())
+    st.write("### Visual Korelasi menggunakan seaborn.")
+    fig, ax = plt.subplots()
+    corr = df.corr()
+    sns.heatmap(corr, cmap = 'coolwarm', annot= True);
+    st.pyplot(fig) 
     
 def visual_data():
     df=open_file()
