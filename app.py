@@ -1,5 +1,5 @@
 '''
-Analisis Statistik Regresi Linear
+Demo Analisis Statistik Regresi Linear
 # app.py
 #!/home/nasri/anaconda3/envs/dashboard_env
 # -*- coding: utf-8 -*-
@@ -22,7 +22,7 @@ from sklearn.linear_model import LinearRegression
 
 features=[
     "Introduksi",
-    "Upload File",
+    #"Upload File",
     "Data head dan Statistik Diskripsi",
     "Korelasi",
     "Visual Data",
@@ -37,14 +37,14 @@ menu=pd.DataFrame(features)
 #[m,n] =menu.shape
 #st.write(m,n)
 #st.sidebar.image("logo_stiei.jpg", use_column_width=False)
-st.sidebar.markdown('<h3 style="color: Black;"> Author: Nasri </h3>', unsafe_allow_html=True)
-st.sidebar.markdown('<h5 style="color: Black;"> email: nasri@stieimlg.ac.id </h5>', unsafe_allow_html=True)
-st.sidebar.markdown('<h1 style="color: Black;">Template Analisis Statistik Regresi Linear</h1>', unsafe_allow_html=True)
+st.sidebar.markdown('<h3 style="color: black;"> Author: Nasri </h3>', unsafe_allow_html=True)
+st.sidebar.markdown('<h5 style="color: black;"> email: nasri@stieimlg.ac.id </h5>', unsafe_allow_html=True)
+st.sidebar.markdown('<h1 style="color: black;">Demo Analisis Statistik Regresi Linear</h1>', unsafe_allow_html=True)
 
 model_analisis = st.sidebar.radio('Baca ketentuan penggunaan dengan seksama, Pilih Analisis Statistik:', menu)
 
 def intro():
-    st.write("## Selamat Datang di Template Analisis Statistik Regresi Linear.  👋  👋")
+    st.write("## Selamat Datang di Demo Analisis Statistik Regresi Linear.  👋  👋")
     st.write("##### author: m nasri aw, email: nasri@stieimlg.ac.id; lecturer at https://www.stieimlg.ac.id/; Des 2024.")
     st.write(f"##### - Ketentuan: ")
     '''
@@ -58,30 +58,28 @@ def intro():
        2. Korelasi.
        3. Visual Data.
        4. Regresi Multi Linear.
-       5. Regresi Linear (Parsial), Scatter Chart Parsial dan Garis Regresi x-y. 
+       5. Regresi Linear (Parsial), Scatter Chart Parsial dan Garis Regreasi x-y. 
        6. Evaluasi Model.
        7. Uji Asumsi Regresi Linear dan Uji Validasi Model.
        8. Simulasi Prediksi.
-       ###### 👈 Pilih Menu di sebelah; Pastikan data telah di upload (langkah ke-2: Upload File)
-    7. Untuk link demo silahkan klik https://huggingface.co/spaces/nasriaw/regresi_linear; Selamat belajar semoga memudahkan untuk memahami statistik regresi.
+      7. Untuk link demo ini dan sources file, silahkan klik https://huggingface.co/spaces/nasriaw/regresi_linear; Selamat belajar semoga memudahkan untuk memahami statistik regresi.
     '''
     return intro
 
 def open_file():
-    if 'data' not in st.session_state:
-        st.session_state.data = None
-
-    def load_data():
-        st.session_state.data = pd.read_csv(st.session_state.loader)
-
-    file = st.file_uploader('Choose a file', type='csv', key='loader', on_change=load_data)
-
-    df = st.session_state.data
-    if df is not None:
-        # Run program
-        st.write('Gunakan Browse Files jika upload data baru.')
+    # if 'data' not in st.session_state:
+    #     st.session_state.data = None
+    # def load_data():
+    #     st.session_state.data = pd.read_csv(st.session_state.loader)
+    # file = st.file_uploader('Choose a file', type='csv', key='loader', on_change=load_data)
+    # df = st.session_state.data
+    # if df is not None:
+    #     # Run program
+    #     st.write('Gunakan Browse Files jika upload data baru.')
+    # return df
+    df = pd.read_csv('data_test_300_kepuasaan_client.csv')
     return df
-#df=open_file()
+df=open_file()
 
 def descriptive():
     df=open_file()
@@ -116,13 +114,12 @@ def visual_data():
     for i in columns:
         st.write(f"##### Chart {(i)}")
         st.bar_chart(df[i]) #scatter, bar, line, area, altair
-    # histogram, Melt
+    # visual melt
     st.write("##### Melting data untuk visual histogram dengan seaborn.")
     nd = pd.melt(df, value_vars =df )
     n1 = sns.FacetGrid (nd, col='variable', col_wrap=3, sharex=False, sharey = False)
     n1 = n1.map(sns.histplot, 'value')
     st.pyplot(n1)
-
     # Distribusi data plot
     st.write("##### Distribusi data plot")
     for i in columns:
@@ -131,14 +128,11 @@ def visual_data():
         sns.histplot(data=df[i], kde=True, color="y", ax=ax)
         st.pyplot(fig)
         st.write(f"{i}: Skewness : {df[i].skew():.3f};", f"Kurtosis : {df[i].kurtosis():.3f}")
-    
     # pairplot
     st.write("##### Pairplot")
     fig = sns.pairplot(df).fig
     st.pyplot(fig) 
-
     # visual boxplot
-    columns = df.columns
     st.write("##### Boxplot")
     fig, ax = plt.subplots()
     sns.boxplot(data=df[columns], orient='h', ax=ax)  # 
@@ -162,7 +156,7 @@ def visual_data():
         f"Max : {np.max(df[i]):.2f};",
         f"IQR (Inter Quartile Range) : {(np.percentile(df[i],75)-np.percentile(df[i],25)):.2f};"
         )
-
+    
 def regresi():
     df=open_file()
     st.write("### 4. Regresi Multi Linear.")
@@ -401,8 +395,8 @@ def simulasi_prediksi():
 
 if model_analisis == "Introduksi":
     intro()
-elif model_analisis == "Upload File":
-    open_file()
+# elif model_analisis == "Upload File":
+#     open_file()
 elif model_analisis == "Data head dan Statistik Diskripsi":
     descriptive()
 elif model_analisis == "Korelasi":
@@ -419,3 +413,6 @@ elif model_analisis == "Uji Asumsi Regresi Linear dan Uji Validasi Model":
     uji_asumsi()
 else:
     simulasi_prediksi()
+
+
+
