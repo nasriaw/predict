@@ -1,5 +1,5 @@
 '''
-Demo Analisis Statistik Regresi Linear
+Analisis Statistik Regresi Linear
 # app.py
 #!/home/nasri/anaconda3/envs/dashboard_env
 # -*- coding: utf-8 -*-
@@ -62,10 +62,9 @@ def intro():
        6. Evaluasi Model.
        7. Uji Asumsi Regresi Linear dan Uji Validasi Model.
        8. Simulasi Prediksi.
-      7. Untuk link demo ini dan sources file, silahkan klik https://huggingface.co/spaces/nasriaw/regresi_linear; Selamat belajar semoga memudahkan untuk memahami statistik regresi.
-    '''
+       7. Untuk link demo ini dan sources file, silahkan klik https://huggingface.co/spaces/nasriaw/regresi_linear; Selamat belajar semoga memudahkan untuk memahami statistik regresi.
     return intro
-
+    '''
 def open_file():
     # if 'data' not in st.session_state:
     #     st.session_state.data = None
@@ -413,6 +412,3 @@ elif model_analisis == "Uji Asumsi Regresi Linear dan Uji Validasi Model":
     uji_asumsi()
 else:
     simulasi_prediksi()
-
-
-
