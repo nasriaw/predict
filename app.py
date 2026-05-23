@@ -1,5 +1,5 @@
 '''
-Analisis Statistik Regresi Linear
+Demo Analisis Statistik Regresi Linear
 # app.py
 #!/home/nasri/anaconda3/envs/dashboard_env
 # -*- coding: utf-8 -*-
@@ -62,9 +62,10 @@ def intro():
        6. Evaluasi Model.
        7. Uji Asumsi Regresi Linear dan Uji Validasi Model.
        8. Simulasi Prediksi.
-       7. Untuk link demo ini dan sources file, silahkan klik https://huggingface.co/spaces/nasriaw/regresi_linear; Selamat belajar semoga memudahkan untuk memahami statistik regresi.
-    return intro
+      7. Untuk link demo ini dan sources file, silahkan klik https://huggingface.co/spaces/nasriaw/regresi_linear; Selamat belajar semoga memudahkan untuk memahami statistik regresi.
     '''
+    return intro
+
 def open_file():
     # if 'data' not in st.session_state:
     #     st.session_state.data = None
@@ -177,9 +178,9 @@ def regresi():
     #atau dengan algoritma
     [m,n] =df.shape
     k=(n-1)
-    st.write(f"Persamaan Regresi untuk Prediksi KepuasanKlient = Intercept {model.params.iloc[0]:0.04f} + Prediktor : ")
+    st.write(f"Persamaan Regresi untuk Prediksi KepuasanKlient = Intercept {model.params[0]:0.04f} + Prediktor : ")
     for i in range(k):
-        st.write(f"- Prediktor {(df.columns[i])} = {model.params.iloc[i+1]:0.04f} x {(df.columns[i])}")
+        st.write(f"- Prediktor {(df.columns[i])} = {(model.params[i+1]):0.04f} x {(df.columns[i])}")
     st.write("Persamaan regresi ini akan digunakan untuk prediksi, simulasi prediksi ada di bagian akhir (bagian ke 8).")
     st.write("### 4.3. Uji Hipotesis Prediktor Parsial & Serentak : ")
     st.write("#### a. P-Value & Uji Hipotesis Prediktor Parsial: ")
@@ -387,9 +388,9 @@ def simulasi_prediksi():
     [k,l]=df1.shape
     sum_prediktor=0
     for i in range(k):
-        sum_prediktor += model.params.iloc[i+1] * df1.iloc[i]
+        sum_prediktor += (model.params[i+1])*(df1.iloc[i])
     #st.write(f" jumlah prediktor: {sum_prediktor}")
-    predik2=model.params.iloc[0] + sum_prediktor
+    predik2=(model.params)[0] + sum_prediktor
     st.write(f"#### Prediksi {prediksi_y} = {predik2}")
 
 if model_analisis == "Introduksi":
@@ -412,3 +413,6 @@ elif model_analisis == "Uji Asumsi Regresi Linear dan Uji Validasi Model":
     uji_asumsi()
 else:
     simulasi_prediksi()
+
+
+
